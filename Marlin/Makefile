@@ -56,8 +56,9 @@
 # Or, try disconnecting USB to power down and then reconnecting before running avrdude.
 #
 
+AVRDUDE_PROGRAMMER=wiring
 # This defines the board to compile for (see boards.h for your board's ID)
-HARDWARE_MOTHERBOARD ?= 11
+HARDWARE_MOTHERBOARD ?= 1504
 
 # Arduino source install directory, and version number
 # On most linuxes this will be /usr/share/arduino
