@@ -409,7 +409,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 5  // EDIT HERE - Triangle Labs HE thermistor
+#define TEMP_SENSOR_0 1  // EDIT HERE - Triangle Labs HE thermistor
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -486,9 +486,23 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
   // Creality Ender-3
-  #define DEFAULT_Kp 23.47
-  #define DEFAULT_Ki 1.87
-  #define DEFAULT_Kd 73.79
+  // #define DEFAULT_Kp 23.47
+  // #define DEFAULT_Ki 1.87
+  // #define DEFAULT_Kd 73.79
+
+  // Marlin auto-tune values
+  // (aircon)
+  // #define DEFAULT_Kp 19.67
+  // #define DEFAULT_Ki 1.91
+  // #define DEFAULT_Kd 50.59
+  // (ambient)
+  // #define DEFAULT_Kp 18.58
+  // #define DEFAULT_Ki 1.73
+  // #define DEFAULT_Kd 49.89
+  // (avg)
+  #define DEFAULT_Kp 19.16
+  #define DEFAULT_Ki 1.82
+  #define DEFAULT_Kd 50.24
 
   // Ultimaker
   // #define DEFAULT_Kp 22.2
@@ -542,9 +556,9 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 159.55
-  #define DEFAULT_bedKi 31.88
-  #define DEFAULT_bedKd 532.35
+  // #define DEFAULT_bedKp 159.55
+  // #define DEFAULT_bedKi 31.88
+  // #define DEFAULT_bedKd 532.35
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -553,6 +567,9 @@
   //#define DEFAULT_bedKd 1675.16
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
+  #define DEFAULT_bedKp 201.63
+  #define DEFAULT_bedKi 38.22
+  #define DEFAULT_bedKd 709.06
 #endif // PIDTEMPBED
 
 // @section extruder
@@ -572,7 +589,7 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 250
+#define EXTRUDE_MAXLENGTH 300 // EDIT HERE - default 200
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -772,8 +789,8 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
- #define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
- #define DEFAULT_RETRACT_ACCELERATION  500    // E acceleration for retracts
+#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  500    // E acceleration for retracts
 #define DEFAULT_TRAVEL_ACCELERATION   500    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
@@ -808,7 +825,7 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.08  // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.05  // (mm) Distance from real junction edge
 #endif
 
 /**
@@ -892,16 +909,6 @@
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
 #define BLTOUCH
-
-/**
- * Use the probe for Z-axis homing when connected to a custom pin (i.e. a pin
- * other than the board's Z_MIN_PIN), such as on the SKR 1.4 board which has a
- * dedicated port for a BLTouch or servo probe's Z trigger.
- *
- * If using a custom pin without this option a separate Z-endstop must be
- * connected to the board's native port.
- */
-#define CUSTOM_PROBE_PIN_HOMING
 
 /**
  * Use the probe for Z-axis homing when connected to a custom pin (i.e. a pin
@@ -1123,8 +1130,8 @@
 #define Y_BED_SIZE 235
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 5
-#define Y_MIN_POS -25
+#define X_MIN_POS 7
+#define Y_MIN_POS -26
 #define Z_MIN_POS 0
 #define X_MAX_POS (X_BED_SIZE + (X_MIN_POS))
 #define Y_MAX_POS (Y_BED_SIZE + (Y_MIN_POS))
