@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
 #pragma once
@@ -25,18 +25,12 @@
  * MKS SGEN-L pin assignments
  */
 
-#ifndef MCU_LPC1768
+#if NOT_TARGET(MCU_LPC1768)
   #error "Oops! Make sure you have the LPC1768 environment selected in your IDE."
 #endif
 
 #define BOARD_INFO_NAME   "MKS SGen-L"
 #define BOARD_WEBSITE_URL "github.com/makerbase-mks/MKS-SGEN_L"
-
-//
-// EEPROM
-//
-#define FLASH_EEPROM_EMULATION
-//#define SDCARD_EEPROM_EMULATION
 
 //
 // Servos
@@ -56,7 +50,7 @@
 //
 // Limit Switches
 //
-#if X_STALL_SENSITIVITY
+#ifdef X_STALL_SENSITIVITY
   #define X_STOP_PIN                  X_DIAG_PIN
   #if X_HOME_DIR < 0
     #define X_MAX_PIN                      P1_28  // X+
@@ -68,7 +62,7 @@
   #define X_MAX_PIN                        P1_28  // X+
 #endif
 
-#if Y_STALL_SENSITIVITY
+#ifdef Y_STALL_SENSITIVITY
   #define Y_STOP_PIN                  Y_DIAG_PIN
   #if Y_HOME_DIR < 0
     #define Y_MAX_PIN                      P1_26  // Y+
@@ -80,7 +74,7 @@
   #define Y_MAX_PIN                        P1_26  // Y+
 #endif
 
-#if Z_STALL_SENSITIVITY
+#ifdef Z_STALL_SENSITIVITY
   #define Z_STOP_PIN                  Z_DIAG_PIN
   #if Z_HOME_DIR < 0
     #define Z_MAX_PIN                      P1_24  // Z+
@@ -159,7 +153,7 @@
    * Hardware serial communication ports.
    * If undefined software serial is used according to the pins below
    */
-  //#define X_HARDWARE_SERIAL  Serial
+  //#define X_HARDWARE_SERIAL  Serial1
   //#define X2_HARDWARE_SERIAL Serial1
   //#define Y_HARDWARE_SERIAL  Serial1
   //#define Y2_HARDWARE_SERIAL Serial1
@@ -194,7 +188,7 @@
   #define Z2_SERIAL_RX_PIN                 P1_17
 
   // Reduce baud rate to improve software serial reliability
-  #define TMC_BAUD_RATE 19200
+  #define TMC_BAUD_RATE                    19200
 #endif // TMC2208 || TMC2209
 
 //
@@ -235,7 +229,7 @@
  *                _____                                            _____
  * (BEEPER) 1.31 | · · | 1.30 (BTN_ENC)          (MISO)       0.8 | · · | 0.7  (SD_SCK)
  * (LCD_EN) 0.18 | · · | 0.16 (LCD_RS)           (BTN_EN1)   3.25 | · · | 0.28 (SD_CS2)
- * (LCD_D4) 0.15 | · · | 0.17 (LCD_D5)           (BTN_EN2)   3.26 | · · | 1.20 (SD_MOSI)
+ * (LCD_D4) 0.15 | · · | 0.17 (LCD_D5)           (BTN_EN2)   3.26 | · · | 0.9  (SD_MOSI)
  * (LCD_D6)  1.0 | · · | 1.22 (LCD_D7)           (SD_DETECT) 0.27 | · · | RST
  *           GND | · · | 5V                                   GND | · · | NC
  *                -----                                            -----
@@ -285,7 +279,7 @@
         #define DOGLCD_CS                  P0_18
         #define DOGLCD_A0                  P0_16
         #define DOGLCD_SCK                 P0_07
-        #define DOGLCD_MOSI                P1_20
+        #define DOGLCD_MOSI                P0_09
 
         #define LCD_BACKLIGHT_PIN          -1
 
